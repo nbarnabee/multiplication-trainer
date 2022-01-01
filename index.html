@@ -16,7 +16,7 @@
   <label for="answerField"></label><input type="text" id="answerField" class="answerField">
   <input type="submit" value="Answer" class="answerClick">
   <p class="answerEval">Try your best!</p>
-  <!-- <input type="reset" value="Reset" class="reset"> -->
+  <input type="submit" value="Next problem!" class="reset">
 
   <script>
     let x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
@@ -35,21 +35,21 @@
       if (answer == x * y) {
         answerEval.textContent = "Correct!";
       } else {
-        answerEval.textContent = 'No, the answer is' + " " + x * y
+        answerEval.textContent = `${x} * ${y} = ${x*y}`;
       }
       answerSubmit.value = "";
+      
     }
 
-    //function resetProblem() {   //reset the problem
-    // answerSubmit.value = '';
-    // answerEval.textContent = "You can do it!";
-    //  x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
-    //   y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
-    //   problemDisplay.textContent = `${x} * ${y}`; // the problem display
-    //  }
+    function resetProblem() {   //reset the problem
+    answerEval.textContent = "Let's go!";
+    x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
+    y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
+    problemDisplay.textContent = `${x} * ${y}`; // the problem display
+      }
 
     answerClick.addEventListener('click', checkAnswer);
- //   reset.addEventListener('click', resetProblem);
+    reset.addEventListener('click', resetProblem);
 
   </script>
 </body>
