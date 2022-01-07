@@ -30,16 +30,16 @@
     const answerEval = document.querySelector('.answerEval'); // the response
     const scoreStreak = document.querySelector('.scoreStreak'); // current streak
     const scoreTotal = document.querySelector('.scoreTotal'); // number of correct answers
-    const incorrect = document.querySelector('.incorrect'); // number of mistakes
+    const incorrect = document.querySelector('.incorrect'); // number of incorrect answers
     let currentStreak = 0; //the streak of correct answers
     let totalScore = 0; //number of correct answers
     let mistakes = 0; //number of incorrect answers
     const reset = document.querySelector('.reset');  // reset the problem
 
     problemDisplay.textContent = `${x} * ${y}`; // the problem display
-    scoreStreak.textContent = `You've made ${currentStreak} correct answers in a row!`;
-    scoreTotal.textContent = `You've answered ${totalScore} questions correctly this session!`;
-    incorrect.textContent = `You've gotten ${mistakes} questions incorrect.`;
+    scoreStreak.textContent = `Let's see how many correct answers you can get in a row!`;
+    scoreTotal.textContent = `We'll also tell you how many right answers you've gotten in total.`;
+    incorrect.textContent = `And how many you've gotten wrong, too.`;
 
 
     function checkAnswer() {  //evaluate the response
@@ -54,8 +54,9 @@
         mistakes += 1;
       }
       answerSubmit.value = "";
-      scoreStreak.textContent = `You've made ${currentStreak} correct answers in a row!`;
-      scoreTotal.textContent = `You've answered ${totalScore} questions correctly this session!`;
+      let percentCorrect = (totalScore / (totalScore + mistakes)) * 100;
+      scoreStreak.textContent = `That's ${currentStreak} correct answers in a row!`;
+      scoreTotal.textContent = `You've answered ${totalScore} out of ${totalScore + mistakes} questions correctly this session! That's ${Math.round(percentCorrect)}%!`;
       incorrect.textContent = `You've gotten ${mistakes} questions incorrect.`;
 
     }
