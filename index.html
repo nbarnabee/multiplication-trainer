@@ -15,8 +15,10 @@
   <p class="problemDisplay"></p>
   <label for="answerField"></label><input type="text" id="answerField" class="answerField">
   <input type="submit" value="Answer" class="answerClick">
-  <p class="score"></p>
   <p class="answerEval">Try your best!</p>
+  <p class="scoreStreak"></p>
+  <p class="scoreTotal"></p>
+  <p class="incorrect"></p>
   <input type="submit" value="Next problem!" class="reset">
 
   <script>
@@ -26,20 +28,35 @@
     const answerSubmit = document.querySelector('.answerField'); // the input
     const answerClick = document.querySelector('.answerClick'); // the button
     const answerEval = document.querySelector('.answerEval'); // the response
-    const score = document.querySelector('.score'); // player score
+    const scoreStreak = document.querySelector('.scoreStreak'); // current streak
+    const scoreTotal = document.querySelector('.scoreTotal'); // number of correct answers
+    const incorrect = document.querySelector('.incorrect'); // number of mistakes
+    let currentStreak = 0; //the streak of correct answers
+    let totalScore = 0; //number of correct answers
+    let mistakes = 0; //number of incorrect answers
     const reset = document.querySelector('.reset');  // reset the problem
 
     problemDisplay.textContent = `${x} * ${y}`; // the problem display
+    scoreStreak.textContent = `You've made ${currentStreak} correct answers in a row!`;
+    scoreTotal.textContent = `You've answered ${totalScore} questions correctly this session!`;
+    incorrect.textContent = `You've gotten ${mistakes} questions incorrect.`;
 
 
     function checkAnswer() {  //evaluate the response
       const answer = +answerSubmit.value;
       if (answer == x * y) {
         answerEval.textContent = "Correct!";
+        currentStreak += 1;
+        totalScore += 1;
       } else {
         answerEval.textContent = `${x} * ${y} = ${x * y}`;
+        currentStreak = 0;
+        mistakes += 1;
       }
       answerSubmit.value = "";
+      scoreStreak.textContent = `You've made ${currentStreak} correct answers in a row!`;
+      scoreTotal.textContent = `You've answered ${totalScore} questions correctly this session!`;
+      incorrect.textContent = `You've gotten ${mistakes} questions incorrect.`;
 
     }
 
