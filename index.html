@@ -15,6 +15,7 @@
   <p class="problemDisplay"></p>
   <label for="answerField"></label><input type="text" id="answerField" class="answerField">
   <input type="submit" value="Answer" class="answerClick">
+  <p class="score"></p>
   <p class="answerEval">Try your best!</p>
   <input type="submit" value="Next problem!" class="reset">
 
@@ -25,6 +26,7 @@
     const answerSubmit = document.querySelector('.answerField'); // the input
     const answerClick = document.querySelector('.answerClick'); // the button
     const answerEval = document.querySelector('.answerEval'); // the response
+    const score = document.querySelector('.score'); // player score
     const reset = document.querySelector('.reset');  // reset the problem
 
     problemDisplay.textContent = `${x} * ${y}`; // the problem display
@@ -35,18 +37,18 @@
       if (answer == x * y) {
         answerEval.textContent = "Correct!";
       } else {
-        answerEval.textContent = `${x} * ${y} = ${x*y}`;
+        answerEval.textContent = `${x} * ${y} = ${x * y}`;
       }
       answerSubmit.value = "";
-      
+
     }
 
     function resetProblem() {   //reset the problem
-    answerEval.textContent = "Let's go!";
-    x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
-    y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
-    problemDisplay.textContent = `${x} * ${y}`; // the problem display
-      }
+      answerEval.textContent = "Let's go!";
+      x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
+      y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
+      problemDisplay.textContent = `${x} * ${y}`; // the problem display
+    }
 
     answerClick.addEventListener('click', checkAnswer);
     reset.addEventListener('click', resetProblem);
