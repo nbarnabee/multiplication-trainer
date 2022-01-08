@@ -19,7 +19,6 @@
   <p class="scoreStreak"></p>
   <p class="scoreTotal"></p>
   <p class="incorrect"></p>
-  <input type="submit" value="Next problem!" class="reset">
 
   <script>
     let x;
@@ -34,8 +33,6 @@
     let currentStreak = 0; //the streak of correct answers
     let totalScore = 0; //number of correct answers
     let mistakes = 0; //number of incorrect answers
-    let newProblem = false;
-    const reset = document.querySelector('.reset');  // reset the problem
 
     problemDisplay.textContent = `Ready for a new problem?`; // the problem display
     answerClick.value = `New problem`;
@@ -45,50 +42,42 @@
     incorrect.textContent = `And how many you've gotten wrong, too.`;
 
 
-    //let whatToDo = (answerClick.value === `New problem`) ? resetProblem : checkAnswer;
-
-    answerClick.addEventListener('click', checkAnswer);
+    answerClick.addEventListener('click', whatToDo);
 
 
+    function whatToDo() {
+      if (answerClick.value == 'New problem') { // there's no problem displayed, so we need to generate one
+        x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
+        y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
+        problemDisplay.textContent = `${x} * ${y}`; // the problem display
+        answerClick.value = "Answer";
+        answerSubmit.value = "";
+      } else if (answerClick.value == 'Answer') {  //there is a problem displayed, so we need to evaluate the answer
+        const answer = +answerSubmit.value;
+        if (answer == x * y) {
+          problemDisplay.textContent = `Correct! ${x} * ${y} = ${x * y}`;
+          console.log("Correct answer submitted");
+          currentStreak += 1;
+          totalScore += 1;
+        } else {
+          problemDisplay.textContent = `Incorrect. ${x} * ${y} = ${x * y}`;
+          console.log("Incorrect answer submitted");
+          currentStreak = 0;
+          mistakes += 1;
+        }
 
-    function checkAnswer() {  //evaluate the response
-      const answer = +answerSubmit.value;
-      if (answer == x * y) {
-        problemDisplay.textContent = `Correct! ${x} * ${y} = ${x * y}`;
-        console.log("Correct answer submitted");
-        currentStreak += 1;
-        totalScore += 1;
-      } else {
-        problemDisplay.textContent = `Incorrect. ${x} * ${y} = ${x * y}`;
-        console.log("Incorrect answer submitted");
-        currentStreak = 0;
-        mistakes += 1;
+        answerSubmit.value = "";
+        answerClick.value = `New problem`;
+        let percentCorrect = (totalScore / (totalScore + mistakes)) * 100;
+        scoreStreak.textContent = `That's ${currentStreak} correct answers in a row!`;
+        scoreTotal.textContent = `You've answered ${totalScore} out of ${totalScore + mistakes} questions correctly this session! That's ${Math.round(percentCorrect)}%!`;
+        incorrect.textContent = `You've gotten ${mistakes} questions incorrect.`;
+
       }
-
-      answerSubmit.value = "";
-      answerClick.value = `New problem`;
-      newProblem = false;
-      let percentCorrect = (totalScore / (totalScore + mistakes)) * 100;
-      scoreStreak.textContent = `That's ${currentStreak} correct answers in a row!`;
-      scoreTotal.textContent = `You've answered ${totalScore} out of ${totalScore + mistakes} questions correctly this session! That's ${Math.round(percentCorrect)}%!`;
-      incorrect.textContent = `You've gotten ${mistakes} questions incorrect.`;
-
-    }
-
-    function resetProblem() {   //reset the problem
-      //answerEval.textContent = "Let's go!";
-      x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
-      y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
-      problemDisplay.textContent = `${x} * ${y}`; // the problem display
-      answerClick.value = "Answer";
-      newProblem = true;
-      answerSubmit.value = "";
+      else { console.log("I don't understand what's going wrong") }
     }
 
 
-
-    //answerClick.addEventListener('click', checkAnswer);
-    reset.addEventListener('click', resetProblem);
 
   </script>
 </body>
