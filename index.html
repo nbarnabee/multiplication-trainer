@@ -15,47 +15,59 @@
   <p class="problemDisplay"></p>
   <label for="answerField"></label><input type="text" id="answerField" class="answerField">
   <input type="submit" value="Answer" class="answerClick">
-  <p class="answerEval">Try your best!</p>
+  <!-- <p class="answerEval">Try your best!</p>   I will probably stick "motivational messages" here in the future, but for now this line is redundant-->
   <p class="scoreStreak"></p>
   <p class="scoreTotal"></p>
   <p class="incorrect"></p>
   <input type="submit" value="Next problem!" class="reset">
 
   <script>
-    let x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
-    let y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
+    let x;
+    let y; //our future variables
     const problemDisplay = document.querySelector('.problemDisplay'); // display the problem
     const answerSubmit = document.querySelector('.answerField'); // the input
     const answerClick = document.querySelector('.answerClick'); // the button
-    const answerEval = document.querySelector('.answerEval'); // the response
+    //const answerEval = document.querySelector('.answerEval'); // the response - in future, will contain motivational messages
     const scoreStreak = document.querySelector('.scoreStreak'); // current streak
     const scoreTotal = document.querySelector('.scoreTotal'); // number of correct answers
     const incorrect = document.querySelector('.incorrect'); // number of incorrect answers
     let currentStreak = 0; //the streak of correct answers
     let totalScore = 0; //number of correct answers
     let mistakes = 0; //number of incorrect answers
+    let newProblem = false;
     const reset = document.querySelector('.reset');  // reset the problem
 
     problemDisplay.textContent = `Ready for a new problem?`; // the problem display
     answerClick.value = `New problem`;
+    answerSubmit.value = "";
     scoreStreak.textContent = `Let's see how many correct answers you can get in a row!`;
     scoreTotal.textContent = `We'll also tell you how many right answers you've gotten in total.`;
     incorrect.textContent = `And how many you've gotten wrong, too.`;
+
+
+    //let whatToDo = (answerClick.value === `New problem`) ? resetProblem : checkAnswer;
+
+    answerClick.addEventListener('click', checkAnswer);
+
 
 
     function checkAnswer() {  //evaluate the response
       const answer = +answerSubmit.value;
       if (answer == x * y) {
         problemDisplay.textContent = `Correct! ${x} * ${y} = ${x * y}`;
+        console.log("Correct answer submitted");
         currentStreak += 1;
         totalScore += 1;
       } else {
         problemDisplay.textContent = `Incorrect. ${x} * ${y} = ${x * y}`;
+        console.log("Incorrect answer submitted");
         currentStreak = 0;
         mistakes += 1;
       }
 
       answerSubmit.value = "";
+      answerClick.value = `New problem`;
+      newProblem = false;
       let percentCorrect = (totalScore / (totalScore + mistakes)) * 100;
       scoreStreak.textContent = `That's ${currentStreak} correct answers in a row!`;
       scoreTotal.textContent = `You've answered ${totalScore} out of ${totalScore + mistakes} questions correctly this session! That's ${Math.round(percentCorrect)}%!`;
@@ -64,21 +76,18 @@
     }
 
     function resetProblem() {   //reset the problem
-      answerEval.textContent = "Let's go!";
+      //answerEval.textContent = "Let's go!";
       x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
       y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
       problemDisplay.textContent = `${x} * ${y}`; // the problem display
       answerClick.value = "Answer";
+      newProblem = true;
+      answerSubmit.value = "";
     }
 
-    /* let whatToDo;  //here's where we determine what the button will do but it isn't working like I expected.  let's try something else
-    if (answerClick.value === "Answer!") {
-      whatToDo = checkAnswer;
-    } else {
-      whatToDo = resetProblem;
-    } */
 
-    answerClick.addEventListener('click', checkAnswer);
+
+    //answerClick.addEventListener('click', checkAnswer);
     reset.addEventListener('click', resetProblem);
 
   </script>
