@@ -36,7 +36,8 @@
     let mistakes = 0; //number of incorrect answers
     const reset = document.querySelector('.reset');  // reset the problem
 
-    problemDisplay.textContent = `${x} * ${y}`; // the problem display
+    problemDisplay.textContent = `Ready for a new problem?`; // the problem display
+    answerClick.value = `New problem`;
     scoreStreak.textContent = `Let's see how many correct answers you can get in a row!`;
     scoreTotal.textContent = `We'll also tell you how many right answers you've gotten in total.`;
     incorrect.textContent = `And how many you've gotten wrong, too.`;
@@ -45,14 +46,15 @@
     function checkAnswer() {  //evaluate the response
       const answer = +answerSubmit.value;
       if (answer == x * y) {
-        answerEval.textContent = "Correct!";
+        problemDisplay.textContent = `Correct! ${x} * ${y} = ${x * y}`;
         currentStreak += 1;
         totalScore += 1;
       } else {
-        answerEval.textContent = `${x} * ${y} = ${x * y}`;
+        problemDisplay.textContent = `Incorrect. ${x} * ${y} = ${x * y}`;
         currentStreak = 0;
         mistakes += 1;
       }
+
       answerSubmit.value = "";
       let percentCorrect = (totalScore / (totalScore + mistakes)) * 100;
       scoreStreak.textContent = `That's ${currentStreak} correct answers in a row!`;
@@ -66,7 +68,15 @@
       x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
       y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
       problemDisplay.textContent = `${x} * ${y}`; // the problem display
+      answerClick.value = "Answer";
     }
+
+    /* let whatToDo;  //here's where we determine what the button will do but it isn't working like I expected.  let's try something else
+    if (answerClick.value === "Answer!") {
+      whatToDo = checkAnswer;
+    } else {
+      whatToDo = resetProblem;
+    } */
 
     answerClick.addEventListener('click', checkAnswer);
     reset.addEventListener('click', resetProblem);
