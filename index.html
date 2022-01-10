@@ -6,12 +6,29 @@
   <title>Simple Multiplication Trainer</title>
   <style>
 
-
   </style>
 </head>
 
 <body>
   <h1 style="font-size: 20px;">Simple Multiplication Trainer</h1>
+  <p>What numbers would you like to work with?</p>
+  <fieldset>
+    <button class="numButton b1" value="1">1</button>
+    <button class="numButton b2" value="2">2</button>
+    <button class="numButton b3" value="3">3</button>
+    <button class="numButton b4" value="4">4</button>
+    <button class="numButton b5" value="5">5</button>
+    <button class="numButton b6" value="6">6</button>
+    <button class="numButton b7" value="7">7</button>
+    <button class="numButton b8" value="8">8</button>
+    <button class="numButton b9" value="9">9</button>
+    <button class="numButton b10" value="10">10</button>
+    <button class="numButton b11" value="11">11</button>
+    <button class="numButton b12" value="12">12</button>
+    <button class="numButton bAll" value="all">All</button>
+    <button class="numButton reset" value="reset">Reset</button>
+  </fieldset>
+
   <p class="problemDisplay"></p>
   <label for="answerField"></label><input type="text" id="answerField" class="answerField">
   <input type="submit" value="Answer" class="answerClick">
@@ -23,9 +40,10 @@
   <script>
     let x;
     let y; //our future variables
+    const buttonSet = document.querySelector('fieldset');
     const problemDisplay = document.querySelector('.problemDisplay'); // display the problem
-    const answerSubmit = document.querySelector('.answerField'); // the input
-    const answerClick = document.querySelector('.answerClick'); // the button
+    const answerSubmit = document.querySelector('.answerField'); // the input field
+    const answerClick = document.querySelector('.answerClick'); // the answer/new problem button
     //const answerEval = document.querySelector('.answerEval'); // the response - in future, will contain motivational messages
     const scoreStreak = document.querySelector('.scoreStreak'); // current streak
     const scoreTotal = document.querySelector('.scoreTotal'); // number of correct answers
@@ -33,6 +51,7 @@
     let currentStreak = 0; //the streak of correct answers
     let totalScore = 0; //number of correct answers
     let mistakes = 0; //number of incorrect answers
+
 
     problemDisplay.textContent = `Ready for a new problem?`; // the problem display
     answerClick.value = `New problem`;
@@ -43,6 +62,16 @@
 
 
     answerClick.addEventListener('click', whatToDo);
+
+    //deciding on the value of x
+    buttonSet.addEventListener('click', setValues);
+    const possValues = [];
+
+    function setValues(event) {
+      const clicked = event.target;
+      possValues.push(clicked.value);
+      console.log(`Possible values of X are ${possValues}`);
+    }
 
 
     function whatToDo() {
