@@ -82,13 +82,24 @@
     //include something in the above function to uncheck the boxes, once I've started adding colors to them
     //could possibly have something like "if the value of the button is contained in possValues, change the button color"
 
+    function randomElement(array) {
+      let randomNum = Math.floor(Math.random() * (array.length + 1)); //generates a number between 0 and the length of the array
+      let randomArray = array[randomNum];
+      return randomArray;
+    };
+
     function whatToDo() {
       if (answerClick.value == 'New problem') { // there's no problem displayed, so we need to generate one
-        x = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
-        y = Math.floor(Math.random() * 12 + 1); // a second random number between 1 and 12
-        problemDisplay.textContent = `${x} * ${y}`; // the problem display
-        answerClick.value = "Answer";
-        answerSubmit.value = "";
+        if (possValues.length === 0) {
+          alert("Please choose the numbers you'd like to work with.");
+        } else {
+          x = randomElement(possValues);
+          console.log(`Out of possible values of ${possValues}, x is ${x}`);
+          y = Math.floor(Math.random() * 12 + 1); // a random number between 1 and 12
+          problemDisplay.textContent = `${x} * ${y}`; // the problem display
+          answerClick.value = "Answer";
+          answerSubmit.value = "";
+        }
       } else if (answerClick.value == 'Answer') {  //there is a problem displayed, so we need to evaluate the answer
         const answer = +answerSubmit.value;
         if (answer == x * y) {
