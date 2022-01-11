@@ -65,14 +65,22 @@
 
     //deciding on the value of x
     buttonSet.addEventListener('click', setValues);
-    const possValues = [];
+    let possValues = [];
 
     function setValues(event) {
       const clicked = event.target;
-      possValues.push(clicked.value);
+      if (clicked.value === "all") {
+        possValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+      } else if (clicked.value === "reset") {
+        possValues.length = 0;
+      } else {
+        possValues.push(clicked.value);
+      }
       console.log(`Possible values of X are ${possValues}`);
     }
 
+    //include something in the above function to uncheck the boxes, once I've started adding colors to them
+    //could possibly have something like "if the value of the button is contained in possValues, change the button color"
 
     function whatToDo() {
       if (answerClick.value == 'New problem') { // there's no problem displayed, so we need to generate one
