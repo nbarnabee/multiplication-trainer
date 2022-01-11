@@ -73,9 +73,9 @@
         possValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
       } else if (clicked.value === "reset") {
         possValues.length = 0;
-      } else {
+      } else if (clicked.value) {
         possValues.push(clicked.value);
-      }
+      } else return;
       console.log(`Possible values of X are ${possValues}`);
     }
 
