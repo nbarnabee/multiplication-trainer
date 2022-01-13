@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Simple Multiplication Trainer</title>
-  <link ref="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
   <h1 style="font-size: 20px;">Simple Multiplication Trainer</h1>
   <p>What numbers would you like to work with?</p>
-  <fieldset>
+  <div class="buttonSet">
     <button class="numButton b1" value="1">1</button>
     <button class="numButton b2" value="2">2</button>
     <button class="numButton b3" value="3">3</button>
@@ -25,7 +25,7 @@
     <button class="numButton b12" value="12">12</button>
     <button class="numButton bAll" value="all">All</button>
     <button class="numButton reset" value="reset">Reset</button>
-  </fieldset>
+  </div>
 
   <p class="problemDisplay">Ready for a new problem?</p>
   <label for="answerField"></label><input type="text" id="answerField" class="answerField">

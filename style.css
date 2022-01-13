@@ -1,0 +1,13 @@
+.numButton:hover {
+background-color: rgb(183, 98, 193);
+}
+
+.buttonSet {
+  display: flex;
+}
+
+/* color pallete :
+rgb(137, 70, 166) - purple
+rgb(183, 98, 193) - light purple
+rgb(234, 153, 213) - dark pink
+rgb (255, 205, 221) - light pink*/

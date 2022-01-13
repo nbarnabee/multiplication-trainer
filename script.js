@@ -1,6 +1,6 @@
 let x;
 let y; //our future variables
-const buttonSet = document.querySelector('fieldset');
+const buttonSet = document.querySelector('.buttonSet'); //setting things up to pick numbers
 const problemDisplay = document.querySelector('.problemDisplay'); // display the problem
 const answerSubmit = document.querySelector('.answerField'); // the input field
 const answerClick = document.querySelector('.answerClick'); // the answer/new problem button
@@ -21,10 +21,10 @@ answerSubmit.value = "";
 answerClick.addEventListener('click', whatToDo);
 
 //deciding on the value of x
-buttonSet.addEventListener('click', setValues);
+
 let possValues = [];
 
-function setValues(event) {
+  buttonSet.onclick = function(event) {
   const clicked = event.target;
   if (clicked.value === "all") {
     possValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -40,7 +40,8 @@ function setValues(event) {
 //could possibly have something like "if the value of the button is contained in possValues, change the button color"
 
 function randomElement(array) {
-  let randomNum = Math.floor(Math.random() * (array.length + 1)); //generates a number between 0 and the length of the array
+  let randomNum = Math.floor(Math.random() * array.length); //generates a number between 0 and the length of the array
+  console.log(`${randomNum}`);
   let randomArray = array[randomNum];
   return randomArray;
 };
