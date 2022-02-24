@@ -38,6 +38,7 @@ let possValues = [];
 
 //include something in the above function to uncheck the boxes, once I've started adding colors to them
 //could possibly have something like "if the value of the button is contained in possValues, change the button color"
+//could use a class and toggle it, or else could match it to the number's presence in the array
 
 function randomElement(array) {
   let randomNum = Math.floor(Math.random() * array.length); //generates a number between 0 and the length of the array
