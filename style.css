@@ -1,13 +1,62 @@
-.numButton:hover {
-background-color: rgb(183, 98, 193);
+:root {
+--primary: #FCE4D8;
+--dark: #331E38;
+--pop: #38E4AE;
+--poplight: #5DE9BD;
+--popdk:   #18B482;
+--purple: #A14EBF;
+--purpledk: #7C3696;
+--purplelight: #A75AC4;
+--green: #7BD389;
+}
+
+body {
+  background: var(--primary);
+  box-sizing: border-box;
 }
 
 .buttonSet {
+  width: 80%;
+  max-width: 1000px;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  margin: 0 auto;
+  gap: 10px;
 }
 
-/* color pallete :
-rgb(137, 70, 166) - purple
-rgb(183, 98, 193) - light purple
-rgb(234, 153, 213) - dark pink
-rgb (255, 205, 221) - light pink*/
+.numButton {
+  color: white;
+  background-color: var(--purple);
+  width: 110px;
+  border: none;
+  font-size: 2rem;
+  padding: 1em;
+  border-radius: 50%;
+}
+
+/* .numButton.bAll,
+.numButton.reset {
+  flex-grow: 1;
+  width: auto;
+  max-width: 100%;
+  border-radius: 100px;
+  text-align: center;
+} */
+
+.numButton:hover:not(.included) {
+  background-color: var(--purplelight);
+}
+
+.numButton:active {
+  background-color: var(--purpledk);
+  transform: scale(0.9);
+}
+  
+.included {
+   background-color: var(--purpledk);
+}
+
+
