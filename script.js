@@ -1,6 +1,9 @@
 let x;
 let y; //our future variables
-const buttonSet = document.querySelector('.buttonSet'); //setting things up to pick numbers
+
+const buttonSet = document.querySelectorAll('.numButton');
+Array.from(buttonSet).forEach(element => element.addEventListener("click", updateNumSet));
+
 const problemDisplay = document.querySelector('.problemDisplay'); // display the problem
 const answerSubmit = document.querySelector('.answerField'); // the input field
 const answerClick = document.querySelector('.answerClick'); // the answer/new problem button
@@ -24,24 +27,31 @@ answerClick.addEventListener('click', whatToDo);
 
 let possValues = [];
 
-  buttonSet.onclick = function(event) {
-  const clicked = event.target;
-  if (clicked.value === "all") {
-    possValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  } else if (clicked.value === "reset") {
-    possValues.length = 0;
-  } else if (clicked.value) {
-    possValues.push(clicked.value);
-  } else return;
-  console.log(`Possible values of X are ${possValues}`);
+function updateNumSet(click) {
+  const clicked = click.target;
+  clicked.classList.toggle("included");
+  if (possValues.includes(clicked.value)) {
+    console.log("Remove it");
+    let i = possValues.indexOf(clicked.value);
+    possValues.splice(i, 1);
+  }
+  else possValues.push(clicked.value);
+  console.log(possValues);
 }
 
-//include something in the above function to uncheck the boxes, once I've started adding colors to them
-//could possibly have something like "if the value of the button is contained in possValues, change the button color"
-//could use a class and toggle it, or else could match it to the number's presence in the array
+// the all and reset buttons are too much of a headache right now
+
+// (clicked.value === "all") {
+//   possValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+// }
+
+// else if (clicked.value === "reset") {
+//   possValues.length = 0;
+// } 
+
 
 function randomElement(array) {
-  let randomNum = Math.floor(Math.random() * array.length); //generates a number between 0 and the length of the array
+  let randomNum = Math.floor(Math.random() * (array.length - 1)); //generates a number between 0 and the length of the array
   console.log(`${randomNum}`);
   let randomArray = array[randomNum];
   return randomArray;
