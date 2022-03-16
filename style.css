@@ -16,7 +16,7 @@ body {
 }
 
 .buttonSet {
-  width: 80%;
+  width: min(80%, 572px);
   max-width: 750px;
   display: flex;
   flex-wrap: wrap;
@@ -27,7 +27,7 @@ body {
   gap: 10px;
 }
 
-.numButton {
+.buttonSet > button {
   color: white;
   background-color: var(--purple);
   width: 110px;
@@ -37,25 +37,26 @@ body {
   border-radius: 50%;
 }
 
-/* .numButton.bAll,
-.numButton.reset {
+.buttonSet > .specialButton {
   flex-grow: 1;
+  flex-basis: 100%;
   width: auto;
+  padding: 0.5em;
   max-width: 100%;
   border-radius: 100px;
   text-align: center;
-} */
+}
 
-.numButton:hover:not(.included) {
+.buttonSet > button:hover:not(.included) {
   background-color: var(--purplelight);
 }
 
-.numButton:active {
+.buttonSet > button:active {
   background-color: var(--purpledk);
   transform: scale(0.9);
 }
   
-.included {
+.buttonSet > .included {
    background-color: var(--purpledk);
 }
 
